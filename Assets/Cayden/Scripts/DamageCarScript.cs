@@ -5,18 +5,21 @@ using UnityEngine;
 
 public class DamageCarScript : MonoBehaviour
 {
+    #region variables
     public float vehicleSpeed;
     public float vehicleHealth = 100f;
     public float vehicleDamage;
+    #endregion
 
+    #region references
     public Rigidbody rb;
     public Deformable vehicleDeformer;
     public PerlinNoiseDeformer perlinNoiseDeformer;
+    #endregion
 
-    private void OnCollisionEnter(Collision collision)
+    #region functions
+    void DamageCalculator()
     {
-        Debug.Log(vehicleSpeed);
-
         if (vehicleSpeed > 40)
         {
             vehicleHealth -= 40;
@@ -41,16 +44,7 @@ public class DamageCarScript : MonoBehaviour
         vehicleSpeed = 0;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        vehicleDeformer = GetComponentInChildren<Deformable>();
-        perlinNoiseDeformer = GetComponentInChildren<PerlinNoiseDeformer>();
-    }
-
-    // Update is called once per frame
-    void Update()
+    void DeformMesh()
     {
         vehicleSpeed = rb.velocity.magnitude;
 
@@ -70,5 +64,34 @@ public class DamageCarScript : MonoBehaviour
         {
             perlinNoiseDeformer.MagnitudeScalar = 0.1f;
         }
+    }
+
+    void GetRef()
+    {
+        rb = GetComponent<Rigidbody>();
+        vehicleDeformer = GetComponentInChildren<Deformable>();
+        perlinNoiseDeformer = GetComponentInChildren<PerlinNoiseDeformer>();
+    }
+    #endregion
+
+    #region collisions
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(vehicleSpeed);
+
+        DamageCalculator();
+    }
+    #endregion
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        GetRef();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        DeformMesh();
     }
 }
