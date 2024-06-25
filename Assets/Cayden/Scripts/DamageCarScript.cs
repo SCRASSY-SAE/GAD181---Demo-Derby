@@ -13,7 +13,6 @@ public class DamageCarScript : MonoBehaviour
 
     #region references
     public Rigidbody rb;
-    public Deformable vehicleDeformer;
     public PerlinNoiseDeformer perlinNoiseDeformer;
     #endregion
 
@@ -69,7 +68,6 @@ public class DamageCarScript : MonoBehaviour
     void GetRef()
     {
         rb = GetComponent<Rigidbody>();
-        vehicleDeformer = GetComponentInChildren<Deformable>();
         perlinNoiseDeformer = GetComponentInChildren<PerlinNoiseDeformer>();
     }
     #endregion
