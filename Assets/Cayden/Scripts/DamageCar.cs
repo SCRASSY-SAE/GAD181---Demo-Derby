@@ -1,13 +1,14 @@
 using Deform;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageCarScript : MonoBehaviour
+public class DamageCar : MonoBehaviour
 {
     #region variables
     public float vehicleSpeed;
-    public float vehicleHealth = 100f;
+    [Range(0f, 100f)] public float vehicleHealth = 100f;
     public float vehicleDamage;
     #endregion
 
@@ -19,37 +20,41 @@ public class DamageCarScript : MonoBehaviour
     #region functions
     void DamageCalculator()
     {
-        if (vehicleSpeed > 40)
+        if (vehicleSpeed > 40f)
         {
-            vehicleHealth -= 40;
+            vehicleHealth -= 40f;
             Debug.Log("40");
         }
-        else if (vehicleSpeed > 30)
+        else if (vehicleSpeed > 30f)
         {
-            vehicleHealth -= 30;
+            vehicleHealth -= 30f;
             Debug.Log("30");
         }
-        else if (vehicleSpeed > 20)
+        else if (vehicleSpeed > 20f)
         {
-            vehicleHealth -= 20;
+            vehicleHealth -= 20f;
             Debug.Log("20");
         }
-        else if (vehicleSpeed > 15)
+        else if (vehicleSpeed > 15f)
         {
-            vehicleHealth -= 15;
+            vehicleHealth -= 10f;
             Debug.Log("15");
         }
 
         vehicleSpeed = 0;
+
+        DeformMesh();
     }
 
     void DeformMesh()
     {
-        vehicleSpeed = rb.velocity.magnitude;
-
-        if (vehicleHealth < 20f)
+        if (vehicleHealth < 10f)
         {
-            perlinNoiseDeformer.MagnitudeScalar = 0.5f;
+            perlinNoiseDeformer.MagnitudeScalar = 0.6f;
+        }
+        else if (vehicleHealth < 20f)
+        {
+            perlinNoiseDeformer.MagnitudeScalar = 0.4f;
         }
         else if (vehicleHealth < 40)
         {
@@ -77,7 +82,7 @@ public class DamageCarScript : MonoBehaviour
     {
         Debug.Log(vehicleSpeed);
 
-        DamageCalculator();
+        GameEvents.gameEventManager.VehicleDamaged();
     }
     #endregion
 
@@ -85,11 +90,13 @@ public class DamageCarScript : MonoBehaviour
     void Start()
     {
         GetRef();
+
+        GameEvents.gameEventManager.onVehicleDamaged += DamageCalculator;
     }
 
     // Update is called once per frame
     void Update()
     {
-        DeformMesh();
+        vehicleSpeed = rb.velocity.magnitude;
     }
 }

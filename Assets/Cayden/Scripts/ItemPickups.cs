@@ -5,7 +5,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ItemPickupsScript : MonoBehaviour
+public class ItemPickups : MonoBehaviour
 {
     #region variables
     public Transform a;
