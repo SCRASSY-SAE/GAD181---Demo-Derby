@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -11,6 +12,8 @@ public class ItemPickupsScript : MonoBehaviour
     public Transform b;
     public float time;
     public int direction = 1;
+    public enum itemType { HealthBoost, SpeedBoost, Bomb }
+    public itemType itemClassType;
     #endregion
 
     #region

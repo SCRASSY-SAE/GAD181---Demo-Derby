@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 1488323488951527370}
   - component: {fileID: 7327931272758516390}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: ObjectMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,7 +162,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -186,6 +186,7 @@ MonoBehaviour:
   b: {fileID: 7812298154279997103}
   time: 0.5
   direction: 1
+  itemClassType: 0
 --- !u!1 &9076594145612479469
 GameObject:
   m_ObjectHideFlags: 0
