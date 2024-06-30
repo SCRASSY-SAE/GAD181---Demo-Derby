@@ -5125,9 +5125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vehicleSpeed: 0
   vehicleHealth: 100
-  rb: {fileID: 0}
-  perlinNoiseDeformer: {fileID: 0}
-  damageParticleSystem: {fileID: 0}
 --- !u!114 &2026341659454212173
 MonoBehaviour:
   m_ObjectHideFlags: 0
