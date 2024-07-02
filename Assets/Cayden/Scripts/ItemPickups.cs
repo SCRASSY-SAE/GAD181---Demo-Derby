@@ -10,8 +10,8 @@ public class ItemPickups : MonoBehaviour
     #region variables
     public Transform a;
     public Transform b;
-    float time;
-    int direction = 1;
+    public float time;
+    public int direction = 1;
 
     public float healthBoostValue;
     public float speedBoostValue;
@@ -60,34 +60,42 @@ public class ItemPickups : MonoBehaviour
         ItemBob();
     }
 
-    private void OnCollisionEnter(Collision collidedObj)
+    private void OnTriggerEnter(Collider collidedObj)
     {
-        if (collidedObj.gameObject.tag == "Player" && collidedObj.gameObject.GetComponent<DamageCar>())
+        Debug.Log(collidedObj.gameObject.tag);
+
+        if (collidedObj.gameObject.tag == "Player" && collidedObj.gameObject.GetComponentInParent<DamageCar>())
         {
-            DamageCar damageCar = collidedObj.gameObject.GetComponent<DamageCar>();
+            DamageCar damageCar = collidedObj.gameObject.GetComponentInParent<DamageCar>();
 
             switch (itemClassType)
             {
+                // Health boost item system
                 case itemType.HealthBoost:
-                    
+                    Debug.Log("Health");
+
                     float playerHealth = damageCar.vehicleHealth;
                     playerHealth += healthBoostValue;
 
-                    Destroy(this.gameObject);
+                    Destroy(this);
                     break;
+
+                // Speed boost item system
                 case itemType.SpeedBoost:
+                    Debug.Log("Speed");
 
+                    Destroy(this);
+                    break;
 
-                    Destroy(this.gameObject);
-                    break ;
+                // Bomb boost item system
                 case itemType.Bomb:
-                    
+                    Debug.Log("Bomb");
+
                     if (!damageCar.doesHaveBomb)
                     {
                         damageCar.doesHaveBomb = true;
                         Destroy(this.gameObject);
                     }
-
                     break;
             }
         }
