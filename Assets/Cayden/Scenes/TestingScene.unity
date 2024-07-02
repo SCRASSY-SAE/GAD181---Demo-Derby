@@ -178,6 +178,8 @@ GameObject:
   - component: {fileID: 229522864}
   - component: {fileID: 229522866}
   - component: {fileID: 229522865}
+  - component: {fileID: 229522867}
+  - component: {fileID: 229522868}
   m_Layer: 0
   m_Name: ThirdPersonCamera
   m_TagString: Untagged
@@ -194,11 +196,11 @@ Transform:
   m_GameObject: {fileID: 229522863}
   serializedVersion: 2
   m_LocalRotation: {x: 0.12278779, y: -0.6963643, z: 0.12278779, w: 0.6963643}
-  m_LocalPosition: {x: 5, y: 4.64, z: 0}
+  m_LocalPosition: {x: 3.46, y: 5.5169997, z: 0.70606124}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 510514553}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 20, y: -90, z: 0}
 --- !u!81 &229522865
 AudioListener:
@@ -259,6 +261,48 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!54 &229522867
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229522863}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!114 &229522868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229522863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10fe03f6eb5b39d4bbcf9df669011c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 510514548}
+  height: 4.5
+  distance: 6
 --- !u!1001 &318894145
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -329,9 +373,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 847209568}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 229522864}
     - targetCorrespondingSourceObject: {fileID: 3113520358709370537, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1704936227}
@@ -345,6 +386,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 510514552}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 510514554}
     - targetCorrespondingSourceObject: {fileID: 2069809309956374449, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1254280100}
@@ -458,6 +502,8 @@ MonoBehaviour:
     active: 1
   - component: {fileID: 0}
     active: 1
+  - component: {fileID: 0}
+    active: 1
   customBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.25, y: 0.25, z: 0.25}
@@ -525,6 +571,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
   m_PrefabInstance: {fileID: 318894145}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &510514554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510514548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d845bf0828a228840aee2f54778d14f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  turn: 10
 --- !u!1001 &764546554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6000,6 +6060,7 @@ SceneRoots:
   - {fileID: 1249023646}
   - {fileID: 1582542157}
   - {fileID: 1287109189}
+  - {fileID: 229522864}
   - {fileID: 318894145}
   - {fileID: 162567092}
   - {fileID: 2002035914}
