@@ -540,6 +540,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 9033250552675136698, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
+--- !u!4 &356892078 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7077696549692730180, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
+  m_PrefabInstance: {fileID: 318894145}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &494425117 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7408889344406867557, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
@@ -688,8 +693,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d845bf0828a228840aee2f54778d14f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 20
   turn: 0.3
+  frontWheel01: {fileID: 1254280101}
+  frontWheel02: {fileID: 356892078}
+  backWheel01: {fileID: 1710428699}
+  backWheel02: {fileID: 2045535895}
 --- !u!1 &685713117
 GameObject:
   m_ObjectHideFlags: 0
@@ -5913,6 +5922,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -848976006376228360, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
+--- !u!4 &1254280101 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2968804604119305037, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
+  m_PrefabInstance: {fileID: 318894145}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1287109185
 GameObject:
   m_ObjectHideFlags: 0
@@ -6193,6 +6207,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7261246983549958552, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
+--- !u!4 &1710428699 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3301644470746098507, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
+  m_PrefabInstance: {fileID: 318894145}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2002035908
 GameObject:
   m_ObjectHideFlags: 0
@@ -6368,6 +6387,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6314108271506970093, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
+--- !u!4 &2045535895 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7561934183120096561, guid: 5398f84ef9abf38478c434d44cfe693a, type: 3}
+  m_PrefabInstance: {fileID: 318894145}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

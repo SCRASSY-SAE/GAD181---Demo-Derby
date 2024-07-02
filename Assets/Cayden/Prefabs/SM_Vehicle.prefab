@@ -5124,6 +5124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vehicleSpeed: 0
+  doesHaveBomb: 0
   vehicleHealth: 100
 --- !u!114 &2026341659454212173
 MonoBehaviour:

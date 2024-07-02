@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -7,6 +8,14 @@ public class Movement : MonoBehaviour
     public float speed;
     public float turn;
     Rigidbody rb;
+
+    public Transform frontWheel01;
+    public Transform frontWheel02;
+    public Transform backWheel01;
+    public Transform backWheel02;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +38,11 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.UpArrow))
         {
             z += 1;
+
+            frontWheel01.Rotate(new Vector3(0, 0, 200 * Time.deltaTime));
+            frontWheel02.Rotate(new Vector3(0, 0, -200 * Time.deltaTime));
+            backWheel01.Rotate(new Vector3(0, 0, 200 * Time.deltaTime));
+            backWheel02.Rotate(new Vector3(0, 0, -200 * Time.deltaTime));
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
