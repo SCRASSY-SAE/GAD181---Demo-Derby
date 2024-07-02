@@ -39,21 +39,22 @@ public class Movement : MonoBehaviour
         {
             z += 1;
 
-            frontWheel01.Rotate(new Vector3(0, 0, 200 * Time.deltaTime));
-            frontWheel02.Rotate(new Vector3(0, 0, -200 * Time.deltaTime));
-            backWheel01.Rotate(new Vector3(0, 0, 200 * Time.deltaTime));
-            backWheel02.Rotate(new Vector3(0, 0, -200 * Time.deltaTime));
+            frontWheel01.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
+            frontWheel02.Rotate(new Vector3(0, 0, -speed * Time.deltaTime));
+            backWheel01.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
+            backWheel02.Rotate(new Vector3(0, 0, -speed * Time.deltaTime));
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
             z -= 1;
         }
-        //rb.AddForce(transform.right * z * -speed);
+                
+        rb.AddForce(transform.right * z * -2000);
+        //rb.AddForce(transform.up * 1000);
         //rb.AddRelativeTorque(new Vector3(0, x*turn, 0));
-        Vector3 vel = rb.velocity;
-        vel = transform.right * z * -speed;
-        vel.y = rb.velocity.y;
-        rb.angularVelocity += new Vector3(0, x * turn, 0);
-        rb.velocity = vel;
+
+        float vehicleVelocity = rb.velocity.magnitude * 10;
+        
+        
     }
 }

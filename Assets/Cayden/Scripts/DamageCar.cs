@@ -103,7 +103,7 @@ public class DamageCar : MonoBehaviour
 
     void GetRef()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = transform.GetComponentInParent<Rigidbody>();
         perlinNoiseDeformer = GetComponentInChildren<PerlinNoiseDeformer>();
         damageParticleSystem = GetComponentInChildren<ParticleSystem>();
     }
@@ -117,8 +117,6 @@ public class DamageCar : MonoBehaviour
     #region collisions
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(vehicleSpeed);
-
         // Calls the vehicle damage game event
         GameEvents.gameEventManager.VehicleDamaged();
     }

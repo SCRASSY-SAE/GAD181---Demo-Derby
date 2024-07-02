@@ -12,7 +12,7 @@ public class DestructiveObjects : MonoBehaviour
     {
         if (obj.gameObject.tag == "Player")
         {
-            obj.gameObject.GetComponent<DamageCar>().ExternalDamageCalculator(objectSpeed);
+            obj.gameObject.GetComponentInChildren<DamageCar>().ExternalDamageCalculator(objectSpeed);
         }
     }
 
