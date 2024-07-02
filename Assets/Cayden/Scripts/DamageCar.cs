@@ -8,6 +8,7 @@ public class DamageCar : MonoBehaviour
 {
     #region variables
     public float vehicleSpeed;
+    public bool doesHaveBomb;
     [Range(0f, 100f)] public float vehicleHealth = 100f;
     #endregion
 
