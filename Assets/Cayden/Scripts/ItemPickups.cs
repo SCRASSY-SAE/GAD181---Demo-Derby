@@ -10,13 +10,17 @@ public class ItemPickups : MonoBehaviour
     #region variables
     public Transform a;
     public Transform b;
-    public float time;
-    public int direction = 1;
+    float time;
+    int direction = 1;
+
+    public float healthBoostValue;
+    public float speedBoostValue;
+    public float bombDamageValue;
     public enum itemType { HealthBoost, SpeedBoost, Bomb }
     public itemType itemClassType;
     #endregion
 
-    #region
+    #region functions
     Vector3 CurrentMovementTarget()
     {
         if (direction == 1)
@@ -54,5 +58,38 @@ public class ItemPickups : MonoBehaviour
     void Update()
     {
         ItemBob();
+    }
+
+    private void OnCollisionEnter(Collision collidedObj)
+    {
+        if (collidedObj.gameObject.tag == "Player" && collidedObj.gameObject.GetComponent<DamageCar>())
+        {
+            DamageCar damageCar = collidedObj.gameObject.GetComponent<DamageCar>();
+
+            switch (itemClassType)
+            {
+                case itemType.HealthBoost:
+                    
+                    float playerHealth = damageCar.vehicleHealth;
+                    playerHealth += healthBoostValue;
+
+                    Destroy(this.gameObject);
+                    break;
+                case itemType.SpeedBoost:
+
+
+                    Destroy(this.gameObject);
+                    break ;
+                case itemType.Bomb:
+                    
+                    if (!damageCar.doesHaveBomb)
+                    {
+                        damageCar.doesHaveBomb = true;
+                        Destroy(this.gameObject);
+                    }
+
+                    break;
+            }
+        }
     }
 }
