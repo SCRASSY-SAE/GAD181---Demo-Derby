@@ -20,9 +20,13 @@ public class CarController : MonoBehaviour
     [SerializeField] private Transform frontLeftWheelTransform, frontRightWheelTransform;
     [SerializeField] private Transform rearLeftWheelTransform, rearRightWheelTransform;
 
-    private void FixedUpdate()
+    private void Update()
     {
         GetInput();
+    }
+
+    private void FixedUpdate()
+    {
         HandleMotor();
         HandleSteering();
         UpdateWheels();
@@ -35,6 +39,7 @@ public class CarController : MonoBehaviour
 
         // Acceleration Input
         verticalInput = Input.GetAxis("Vertical");
+        Debug.Log(verticalInput);
 
         // Breaking Input
         isBreaking = Input.GetKey(KeyCode.Space);
@@ -45,6 +50,7 @@ public class CarController : MonoBehaviour
         frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
         frontRightWheelCollider.motorTorque = verticalInput * motorForce;
         currentbreakForce = isBreaking ? breakForce : 0f;
+
         ApplyBreaking();
     }
 
@@ -73,10 +79,11 @@ public class CarController : MonoBehaviour
 
     private void UpdateSingleWheel(WheelCollider wheelCollider, Transform wheelTransform)
     {
-        Vector3 pos;
-        Quaternion rot;
-        wheelCollider.GetWorldPose(out pos, out rot);
-        wheelTransform.rotation = rot;
-        wheelTransform.position = pos;
+        Vector3 position;
+        Quaternion rotation;
+
+        wheelCollider.GetWorldPose(out position, out rotation);
+        wheelTransform.rotation = rotation;
+        wheelTransform.position = position;
     }
 }

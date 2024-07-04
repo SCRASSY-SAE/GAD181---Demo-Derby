@@ -22,22 +22,22 @@ public class DamageCar : MonoBehaviour
     // Handles damage for when the player takes fall damage or hits into another object
     void SelfDamageCalculator()
     {
-        if (vehicleSpeed > 40f)
+        if (vehicleSpeed > 25f)
         {
             vehicleHealth -= 40f;
             Debug.Log("40");
         }
-        else if (vehicleSpeed > 30f)
+        else if (vehicleSpeed > 20f)
         {
             vehicleHealth -= 30f;
             Debug.Log("30");
         }
-        else if (vehicleSpeed > 20f)
+        else if (vehicleSpeed > 15f)
         {
             vehicleHealth -= 20f;
             Debug.Log("20");
         }
-        else if (vehicleSpeed > 15f)
+        else if (vehicleSpeed > 10f)
         {
             vehicleHealth -= 10f;
             Debug.Log("15");
@@ -103,7 +103,7 @@ public class DamageCar : MonoBehaviour
 
     void GetRef()
     {
-        rb = transform.GetComponentInParent<Rigidbody>();
+        rb = transform.GetComponent<Rigidbody>();
         perlinNoiseDeformer = GetComponentInChildren<PerlinNoiseDeformer>();
         damageParticleSystem = GetComponentInChildren<ParticleSystem>();
     }
