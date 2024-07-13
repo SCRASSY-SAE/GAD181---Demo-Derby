@@ -39,7 +39,6 @@ public class CarController : MonoBehaviour
 
         // Acceleration Input
         verticalInput = Input.GetAxis("Vertical");
-        Debug.Log(verticalInput);
 
         // Breaking Input
         isBreaking = Input.GetKey(KeyCode.Space);

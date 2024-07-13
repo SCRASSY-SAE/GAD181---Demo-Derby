@@ -7,11 +7,11 @@ public class TitleScreen : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene("ArenaScene");
     }
     public void QuitGame()
     {
-        Debug.Log("hello");
+        Debug.Log("Quit");
         Application.Quit();
     }
 }
