@@ -8,6 +8,8 @@ public class CarController : MonoBehaviour
     private float horizontalInput, verticalInput;
     private float currentSteerAngle, currentbreakForce;
     private bool isBreaking;
+    PlayerHUD player;
+    
 
     // Settings
     [SerializeField] private float motorForce, breakForce, maxSteerAngle;
@@ -19,17 +21,28 @@ public class CarController : MonoBehaviour
     // Wheels
     [SerializeField] private Transform frontLeftWheelTransform, frontRightWheelTransform;
     [SerializeField] private Transform rearLeftWheelTransform, rearRightWheelTransform;
-
+    private void Start()
+    {
+        player = GetComponent<PlayerHUD>();
+    }
     private void Update()
     {
-        GetInput();
+        if (player.CanMove == true)
+        { 
+            GetInput(); 
+        }
     }
 
     private void FixedUpdate()
     {
-        HandleMotor();
-        HandleSteering();
-        UpdateWheels();
+        if ( player.CanMove == true)
+        {
+            HandleMotor();
+            HandleSteering();
+            UpdateWheels();
+            Debug.Log("Drive");
+        }
+        
     }
 
     private void GetInput()

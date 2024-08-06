@@ -16,10 +16,10 @@ using UnityEngine.UI;
 
 public class PrometeoCarController : MonoBehaviour
 {
-
+    PlayerHUD player;
     //CAR SETUP
 
-      [Space(20)]
+    [Space(20)]
       //[Header("CAR SETUP")]
       [Space(10)]
       [Range(20, 190)]
@@ -161,10 +161,11 @@ public class PrometeoCarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      //In this part, we set the 'carRigidbody' value with the Rigidbody attached to this
-      //gameObject. Also, we define the center of mass of the car with the Vector3 given
-      //in the inspector.
-      carRigidbody = gameObject.GetComponent<Rigidbody>();
+        player = FindFirstObjectByType<PlayerHUD>();
+        //In this part, we set the 'carRigidbody' value with the Rigidbody attached to this
+        //gameObject. Also, we define the center of mass of the car with the Vector3 given
+        //in the inspector.
+        carRigidbody = gameObject.GetComponent<Rigidbody>();
       carRigidbody.centerOfMass = bodyMassCenter;
 
       //Initial setup to calculate the drift value of the car. This part could look a bit
@@ -265,110 +266,132 @@ public class PrometeoCarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player.CanMove == true)
+        {
+            //CAR DATA
 
-      //CAR DATA
+            // We determine the speed of the car.
+            carSpeed = (2 * Mathf.PI * frontLeftCollider.radius * frontLeftCollider.rpm * 60) / 1000;
+            // Save the local velocity of the car in the x axis. Used to know if the car is drifting.
+            localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
+            // Save the local velocity of the car in the z axis. Used to know if the car is going forward or backwards.
+            localVelocityZ = transform.InverseTransformDirection(carRigidbody.velocity).z;
 
-      // We determine the speed of the car.
-      carSpeed = (2 * Mathf.PI * frontLeftCollider.radius * frontLeftCollider.rpm * 60) / 1000;
-      // Save the local velocity of the car in the x axis. Used to know if the car is drifting.
-      localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
-      // Save the local velocity of the car in the z axis. Used to know if the car is going forward or backwards.
-      localVelocityZ = transform.InverseTransformDirection(carRigidbody.velocity).z;
+            //CAR PHYSICS
 
-      //CAR PHYSICS
+            /*
+            The next part is regarding to the car controller. First, it checks if the user wants to use touch controls (for
+            mobile devices) or analog input controls (WASD + Space).
 
-      /*
-      The next part is regarding to the car controller. First, it checks if the user wants to use touch controls (for
-      mobile devices) or analog input controls (WASD + Space).
+            The following methods are called whenever a certain key is pressed. For example, in the first 'if' we call the
+            method GoForward() if the user has pressed W.
 
-      The following methods are called whenever a certain key is pressed. For example, in the first 'if' we call the
-      method GoForward() if the user has pressed W.
+            In this part of the code we specify what the car needs to do if the user presses W (throttle), S (reverse),
+            A (turn left), D (turn right) or Space bar (handbrake).
+            */
+            if (useTouchControls && touchControlsSetup)
+            {
 
-      In this part of the code we specify what the car needs to do if the user presses W (throttle), S (reverse),
-      A (turn left), D (turn right) or Space bar (handbrake).
-      */
-      if (useTouchControls && touchControlsSetup){
+                if (throttlePTI.buttonPressed)
+                {
+                    CancelInvoke("DecelerateCar");
+                    deceleratingCar = false;
+                    GoForward();
+                }
+                if (reversePTI.buttonPressed)
+                {
+                    CancelInvoke("DecelerateCar");
+                    deceleratingCar = false;
+                    GoReverse();
+                }
 
-        if(throttlePTI.buttonPressed){
-          CancelInvoke("DecelerateCar");
-          deceleratingCar = false;
-          GoForward();
-        }
-        if(reversePTI.buttonPressed){
-          CancelInvoke("DecelerateCar");
-          deceleratingCar = false;
-          GoReverse();
-        }
+                if (turnLeftPTI.buttonPressed)
+                {
+                    TurnLeft();
+                }
+                if (turnRightPTI.buttonPressed)
+                {
+                    TurnRight();
+                }
+                if (handbrakePTI.buttonPressed)
+                {
+                    CancelInvoke("DecelerateCar");
+                    deceleratingCar = false;
+                    Handbrake();
+                }
+                if (!handbrakePTI.buttonPressed)
+                {
+                    RecoverTraction();
+                }
+                if ((!throttlePTI.buttonPressed && !reversePTI.buttonPressed))
+                {
+                    ThrottleOff();
+                }
+                if ((!reversePTI.buttonPressed && !throttlePTI.buttonPressed) && !handbrakePTI.buttonPressed && !deceleratingCar)
+                {
+                    InvokeRepeating("DecelerateCar", 0f, 0.1f);
+                    deceleratingCar = true;
+                }
+                if (!turnLeftPTI.buttonPressed && !turnRightPTI.buttonPressed && steeringAxis != 0f)
+                {
+                    ResetSteeringAngle();
+                }
 
-        if(turnLeftPTI.buttonPressed){
-          TurnLeft();
-        }
-        if(turnRightPTI.buttonPressed){
-          TurnRight();
-        }
-        if(handbrakePTI.buttonPressed){
-          CancelInvoke("DecelerateCar");
-          deceleratingCar = false;
-          Handbrake();
-        }
-        if(!handbrakePTI.buttonPressed){
-          RecoverTraction();
-        }
-        if((!throttlePTI.buttonPressed && !reversePTI.buttonPressed)){
-          ThrottleOff();
-        }
-        if((!reversePTI.buttonPressed && !throttlePTI.buttonPressed) && !handbrakePTI.buttonPressed && !deceleratingCar){
-          InvokeRepeating("DecelerateCar", 0f, 0.1f);
-          deceleratingCar = true;
-        }
-        if(!turnLeftPTI.buttonPressed && !turnRightPTI.buttonPressed && steeringAxis != 0f){
-          ResetSteeringAngle();
-        }
+            }
+            else
+            {
 
-      }else{
+                if (Input.GetKey(KeyCode.W))
+                {
+                    CancelInvoke("DecelerateCar");
+                    deceleratingCar = false;
+                    GoForward();
+                }
+                if (Input.GetKey(KeyCode.S))
+                {
+                    CancelInvoke("DecelerateCar");
+                    deceleratingCar = false;
+                    GoReverse();
+                }
 
-        if(Input.GetKey(KeyCode.W)){
-          CancelInvoke("DecelerateCar");
-          deceleratingCar = false;
-          GoForward();
-        }
-        if(Input.GetKey(KeyCode.S)){
-          CancelInvoke("DecelerateCar");
-          deceleratingCar = false;
-          GoReverse();
-        }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    TurnLeft();
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    TurnRight();
+                }
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    CancelInvoke("DecelerateCar");
+                    deceleratingCar = false;
+                    Handbrake();
+                }
+                if (Input.GetKeyUp(KeyCode.Space))
+                {
+                    RecoverTraction();
+                }
+                if ((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W)))
+                {
+                    ThrottleOff();
+                }
+                if ((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W)) && !Input.GetKey(KeyCode.Space) && !deceleratingCar)
+                {
+                    InvokeRepeating("DecelerateCar", 0f, 0.1f);
+                    deceleratingCar = true;
+                }
+                if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && steeringAxis != 0f)
+                {
+                    ResetSteeringAngle();
+                }
 
-        if(Input.GetKey(KeyCode.A)){
-          TurnLeft();
-        }
-        if(Input.GetKey(KeyCode.D)){
-          TurnRight();
-        }
-        if(Input.GetKey(KeyCode.Space)){
-          CancelInvoke("DecelerateCar");
-          deceleratingCar = false;
-          Handbrake();
-        }
-        if(Input.GetKeyUp(KeyCode.Space)){
-          RecoverTraction();
-        }
-        if((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))){
-          ThrottleOff();
-        }
-        if((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W)) && !Input.GetKey(KeyCode.Space) && !deceleratingCar){
-          InvokeRepeating("DecelerateCar", 0f, 0.1f);
-          deceleratingCar = true;
-        }
-        if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && steeringAxis != 0f){
-          ResetSteeringAngle();
-        }
-
-      }
+            }
 
 
-      // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
-      AnimateWheelMeshes();
-
+            // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
+            AnimateWheelMeshes();
+        }
     }
 
     // This method converts the car speed data from float to string, and then set the text of the UI carSpeedText with this value.
