@@ -1195,7 +1195,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Demo Derby
+  m_text: Turbo Time Trials
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f953034feffe58d4f8b3620123107879, type: 2}
   m_sharedMaterial: {fileID: -4181505320367443095, guid: f953034feffe58d4f8b3620123107879, type: 2}

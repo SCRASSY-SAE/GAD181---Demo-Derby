@@ -16,7 +16,7 @@ public class ItemPickups : MonoBehaviour
     public float healthBoostValue;
     public float speedBoostValue;
     public float bombDamageValue;
-    public enum itemType { HealthBoost, SpeedBoost, Bomb }
+    public enum itemType { HealthBoost, SpeedBoost}
     public itemType itemClassType;
     #endregion
 
@@ -85,17 +85,6 @@ public class ItemPickups : MonoBehaviour
                     Debug.Log("Speed");
 
                     Destroy(this);
-                    break;
-
-                // Bomb boost item system
-                case itemType.Bomb:
-                    Debug.Log("Bomb");
-
-                    if (!damageCar.doesHaveBomb)
-                    {
-                        damageCar.doesHaveBomb = true;
-                        Destroy(this.gameObject);
-                    }
                     break;
             }
         }

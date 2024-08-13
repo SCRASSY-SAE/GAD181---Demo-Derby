@@ -22,6 +22,8 @@ public class DamageCar : MonoBehaviour
     // Handles damage for when the player takes fall damage or hits into another object
     void SelfDamageCalculator()
     {
+        Debug.Log("Car Hit");
+
         if (vehicleSpeed > 25f)
         {
             vehicleHealth -= 40f;
@@ -118,7 +120,7 @@ public class DamageCar : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // Calls the vehicle damage game event
-        GameEvents.gameEventManager.VehicleDamaged();
+        SelfDamageCalculator();
     }
     #endregion
 
@@ -126,9 +128,6 @@ public class DamageCar : MonoBehaviour
     void Start()
     {
         GetRef();
-
-        // Assignes game event to damage calculator function
-        GameEvents.gameEventManager.onVehicleDamaged += SelfDamageCalculator;
     }
 
     // Update is called once per frame
