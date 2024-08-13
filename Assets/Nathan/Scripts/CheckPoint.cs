@@ -23,6 +23,7 @@ public class CheckPoint : MonoBehaviour
         CheckpointNumber = 0;
         started = false;
         finished = false;   
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -42,7 +43,7 @@ public class CheckPoint : MonoBehaviour
                     finished = true;
                     Debug.Log("finished");
                     TimerInfo.text = timer.timerText.text;
-                    SceneManager.LoadScene("");
+                    SceneManager.LoadScene("End Screen");
                 }
                 else
                 {

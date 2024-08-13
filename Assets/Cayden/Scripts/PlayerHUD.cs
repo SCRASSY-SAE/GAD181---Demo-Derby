@@ -42,8 +42,6 @@ public class PlayerHUD : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(timerText.gameObject);
-        TimerInfo.text = timerText.text;
         timePassed = -3f;
     }
 
