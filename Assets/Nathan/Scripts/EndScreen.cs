@@ -10,7 +10,7 @@ public class EndScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timerText.text = TimerInfo.text;
+        timerText.text = TimerInfo.text;    
     }
 
     public void QuitGame()
@@ -18,6 +18,10 @@ public class EndScreen : MonoBehaviour
         Debug.Log("Quit");
         Application.Quit();
     }
-    public void 
+
+    public void PlayGame()
+    {
+        SceneManager.LoadScene("ArenaScene");
+    }
 
 }

@@ -257,6 +257,7 @@ MonoBehaviour:
   - {fileID: 367369978}
   - {fileID: 46635907}
   - {fileID: 992562723}
+  finished: 0
 --- !u!1 &146002064
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,7 +915,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3275425095023010579, guid: 24b18d3e3c9e4994fb2067fbff5fb760, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 146122035728997485, guid: 2edde2dc267031447bbc92c899603145, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2693647060993686502, guid: 2edde2dc267031447bbc92c899603145, type: 3}
@@ -1193,7 +1195,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5441833697292579787, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -1306,11 +1309,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!224 &1375571899 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5826163392533721677, guid: 2edde2dc267031447bbc92c899603145, type: 3}
-  m_PrefabInstance: {fileID: 604322430}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1582542155
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,7 +1436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84bc76092484eb54d8bab771a5f041b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 1375571899}
   playerCar: {fileID: 48113701}
   timerText: {fileID: 1062902614}
   timePassed: 0

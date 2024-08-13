@@ -13,7 +13,7 @@ public class CheckPoint : MonoBehaviour
 
     private float CheckpointNumber;
     private bool started;
-    private bool finished;
+    public bool finished;
     PlayerHUD timer;
 
     // Update is called once per frame
